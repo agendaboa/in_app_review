@@ -10,11 +10,11 @@ class InAppReview {
   /// Checks if the device is able to show a review dialog.
   ///
   /// On Android the Google Play Store must be installed and the device must be
-  /// running **Android 5 Lollipop(API 21)** or higher.
+  /// running **Android 7.0 (API 24)** or higher.
   ///
-  /// iOS devices must be running **iOS version 10.3** or higher.
+  /// iOS devices must be running **iOS 15** or higher.
   ///
-  /// MacOS devices must be running **MacOS version 10.14** or higher
+  /// MacOS devices must be running **macOS 12** or higher.
   Future<bool> isAvailable() => InAppReviewPlatform.instance.isAvailable();
 
   /// Attempts to show the review dialog. It's recommended to first check if

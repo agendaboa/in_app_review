@@ -10,13 +10,13 @@ import 'in_app_review_platform_interface.dart';
 /// An implementation of [InAppReviewPlatform] that uses method channels.
 class MethodChannelInAppReview extends InAppReviewPlatform {
   MethodChannel _channel = MethodChannel('dev.britannio.in_app_review');
-  Platform _platform = const LocalPlatform();
+  NativePlatform? _platform = NativePlatform.current;
 
   @visibleForTesting
   set channel(MethodChannel channel) => _channel = channel;
 
   @visibleForTesting
-  set platform(Platform platform) => _platform = platform;
+  set platform(NativePlatform platform) => _platform = platform;
 
   @override
   Future<bool> isAvailable() async {
@@ -34,10 +34,15 @@ class MethodChannelInAppReview extends InAppReviewPlatform {
     String? appStoreId,
     String? microsoftStoreId,
   }) async {
-    final bool isiOS = _platform.isIOS;
-    final bool isMacOS = _platform.isMacOS;
-    final bool isAndroid = _platform.isAndroid;
-    final bool isWindows = _platform.isWindows;
+    final platform = _platform;
+    if (platform == null) {
+      throw UnsupportedError('Platform not supported');
+    }
+
+    final bool isiOS = platform.isIOS;
+    final bool isMacOS = platform.isMacOS;
+    final bool isAndroid = platform.isAndroid;
+    final bool isWindows = platform.isWindows;
 
     if (isiOS || isMacOS) {
       await _channel.invokeMethod(
@@ -53,7 +58,7 @@ class MethodChannelInAppReview extends InAppReviewPlatform {
       );
     } else {
       throw UnsupportedError(
-        'Platform(${_platform.operatingSystem}) not supported',
+        'Platform(${platform.operatingSystem}) not supported',
       );
     }
   }

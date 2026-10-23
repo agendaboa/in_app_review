@@ -114,16 +114,18 @@ This plugin can be tested by running your MacOS application locally.
 
 # Requirements
 
+Requires Flutter 3.47 / Dart 3.13 or higher.
+
 ## Android
 
-Requires Android 5 Lollipop(API 21) or higher and the Google Play Store must be installed.
+Requires Android 7.0 (API 24) or higher and the Google Play Store must be installed.
 
 ## iOS
 
-Requires iOS version 10.3
+Requires iOS 15 or higher.
 
 ## MacOS
 
-Requires MacOS version 10.14
+Requires macOS 12 or higher.
 
 Issues & pull requests are more than welcome!

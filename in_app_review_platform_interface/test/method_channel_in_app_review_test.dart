@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:in_app_review_platform_interface/method_channel_in_app_review.dart';
-import 'package:platform/platform.dart';
+import 'package:platform/testing.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -34,9 +34,7 @@ void main() {
     }
   }
 
-  // Converts a nullable type to its non-nullable equivalent (backwards compatibility)
-  (<T>(T? o) => o!)(TestDefaultBinaryMessengerBinding.instance)
-      .defaultBinaryMessenger
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(channel, mockMethodCallHandler);
 
   group('isAvailable', () {
@@ -72,7 +70,7 @@ void main() {
       () async {
         // ARRANGE
         methodChannelInAppReview.platform =
-            FakePlatform(operatingSystem: 'android');
+            TestNativePlatform(operatingSystem: NativePlatform.android);
 
         // ACT
         await methodChannelInAppReview.openStoreListing();
@@ -89,7 +87,7 @@ void main() {
       () async {
         // ARRANGE
         methodChannelInAppReview.platform =
-            FakePlatform(operatingSystem: 'ios');
+            TestNativePlatform(operatingSystem: NativePlatform.iOS);
         final appStoreId = "store_id";
 
         // ACT
@@ -105,7 +103,7 @@ void main() {
       () async {
         // ARRANGE
         methodChannelInAppReview.platform =
-            FakePlatform(operatingSystem: 'macos');
+            TestNativePlatform(operatingSystem: NativePlatform.macOS);
         final appStoreId = "store_id";
 
         // ACT
@@ -121,7 +119,7 @@ void main() {
       () async {
         // ARRANGE
         methodChannelInAppReview.platform =
-            FakePlatform(operatingSystem: 'windows');
+            TestNativePlatform(operatingSystem: NativePlatform.windows);
         final microsoftStoreId = 'store_id';
 
         // ACT

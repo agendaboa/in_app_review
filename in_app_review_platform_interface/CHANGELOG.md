@@ -1,3 +1,8 @@
+# [3.0.0]
+
+- Raise the minimum supported SDK to Flutter 3.47 / Dart 3.13.
+- Replace deprecated `package:platform` `LocalPlatform` and `FakePlatform` APIs. Tests now set a `NativePlatform`.
+
 # [2.0.5]
 - Update tests to be compatible with the latest version of flutter.
 

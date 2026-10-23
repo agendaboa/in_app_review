@@ -6,16 +6,20 @@ import PackageDescription
 let package = Package(
     name: "in_app_review",
     platforms: [
-        .iOS("12.0")
+        .iOS("15.0")
     ],
     products: [
         .library(name: "in-app-review", targets: ["in_app_review"])
     ],
-    dependencies: [],
+    dependencies: [
+        .package(name: "FlutterFramework", path: "../FlutterFramework")
+    ],
     targets: [
         .target(
             name: "in_app_review",
-            dependencies: [],
+            dependencies: [
+                .product(name: "FlutterFramework", package: "FlutterFramework")
+            ],
             resources: [
                 // If your plugin requires a privacy manifest, for example if it uses any required
                 // reason APIs, update the PrivacyInfo.xcprivacy file to describe your plugin's

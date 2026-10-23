@@ -16,8 +16,8 @@ public class InAppReviewPlugin: NSObject, FlutterPlugin {
     ) {
         switch call.method {
         case "requestReview":
-            if #available(OSX 13.0, *) {
-                guard let viewController = NSApplication.shared.mainWindow? .contentViewController else {
+            if #available(macOS 13.0, *) {
+                guard let viewController = NSApplication.shared.mainWindow?.contentViewController else {
                     result(
                         FlutterError(
                             code: "no-view-controller",
@@ -28,21 +28,12 @@ public class InAppReviewPlugin: NSObject, FlutterPlugin {
                 DispatchQueue.main.async {
                     AppStore.requestReview(in: viewController)
                 }
-            } else if #available(OSX 10.14, *) {
-                SKStoreReviewController.requestReview()
             } else {
-                result(
-                    FlutterError(
-                        code: "unavailable",
-                        message: "In-App Review unavailable", details: nil))
+                SKStoreReviewController.requestReview()
             }
             result(nil)
         case "isAvailable":
-            if #available(OSX 10.14, *) {
-                result(true)
-            } else {
-                result(false)
-            }
+            result(true)
         case "openStoreListing":
             let storeId: String = call.arguments as! String
 

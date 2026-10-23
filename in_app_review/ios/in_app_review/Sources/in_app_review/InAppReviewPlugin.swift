@@ -34,32 +34,19 @@ public class InAppReviewPlugin: NSObject, FlutterPlugin {
                 }
             }
             result(nil)
-        } else if #available(iOS 14.0, *) {
-            log("iOS 14+")
+        } else {
+            log("iOS 15")
             if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
                 SKStoreReviewController.requestReview(in: scene)
             }
             result(nil)
-        } else if #available(iOS 10.3, *) {
-            log("iOS 10.3+")
-            SKStoreReviewController.requestReview()
-            result(nil)
-        } else {
-            result(FlutterError(code: "unavailable",
-                              message: "In-App Review unavailable",
-                              details: nil))
         }
     }
     
     
     private func isAvailable(_ result: @escaping FlutterResult) {
-        if #available(iOS 10.3, *) {
-            log("available")
-            result(true)
-        } else {
-            log("unavailable")
-            result(false)
-        }
+        log("available")
+        result(true)
     }
     
     private func openStoreListing(storeId: String?, result: @escaping FlutterResult) {
@@ -78,11 +65,7 @@ public class InAppReviewPlugin: NSObject, FlutterPlugin {
             return
         }
         
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(url)
-        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
         result(nil)
     }
     

@@ -1,3 +1,10 @@
+# [2.1.0]
+
+- Raise the minimum supported SDK to Flutter 3.47 / Dart 3.13.
+- Update Android to Android Gradle Plugin 9.1.0, Gradle 9.3.1, and Java 17, and stop applying the Kotlin Gradle Plugin.
+- Raise the Android minimum SDK to 24, iOS to 15, and macOS to 12.
+- Use the in-repo in_app_review_platform_interface.
+
 # [2.0.12]
 
 - Fix an Android NullPointerException that sometimes occurred when apps were backgrounded.
